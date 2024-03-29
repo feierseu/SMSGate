@@ -8,6 +8,7 @@ import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
+import com.zx.sms.codec.sgip12.msg.SgipActiveTestRequestMessage;
 @Sharable
 public class SgipServerIdleStateHandler extends ChannelDuplexHandler {
 	@Override
@@ -20,7 +21,7 @@ public class SgipServerIdleStateHandler extends ChannelDuplexHandler {
             	if(ctx.channel().attr(GlobalConstance.attributeKey).get() != SessionState.Connect){
             		ctx.close();
             	}else{
-            		ctx.channel().close();
+            		ctx.channel().writeAndFlush(new SgipActiveTestRequestMessage());
             	}
             }
         }else{

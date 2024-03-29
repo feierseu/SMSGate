@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import com.zx.sms.common.GlobalConstance;
 import com.zx.sms.connect.manager.AbstractClientEndpointConnector;
 import com.zx.sms.connect.manager.EndpointEntity;
+import com.zx.sms.handler.sgip.SgipActiveTestRequestMessageHandler;
+import com.zx.sms.handler.sgip.SgipActiveTestResponseMessageHandler;
 import com.zx.sms.handler.sgip.ReWriteNodeIdHandler;
 import com.zx.sms.handler.sgip.SgipDeliverLongMessageHandler;
 import com.zx.sms.handler.sgip.SgipSubmitLongMessageHandler;
@@ -40,6 +42,8 @@ public class SgipClientEndpointConnector extends AbstractClientEndpointConnector
 		//处理长短信
 		pipe.addLast("SgipDeliverLongMessageHandler", new SgipDeliverLongMessageHandler(entity));
 		pipe.addLast("SgipSubmitLongMessageHandler",  new SgipSubmitLongMessageHandler(entity));
+		pipe.addLast("SgipActiveTestRequestMessageHandler",new SgipActiveTestRequestMessageHandler());
+		pipe.addLast("SgipActiveTestResponseMessageHandler",new SgipActiveTestResponseMessageHandler());
 		pipe.addLast("SgipUnbindResponseMessageHandler", new SgipUnbindResponseMessageHandler());
 		pipe.addLast("SgipUnbindRequestMessageHandler", new SgipUnbindRequestMessageHandler());
 	}

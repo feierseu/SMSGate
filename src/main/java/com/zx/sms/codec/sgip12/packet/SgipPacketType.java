@@ -17,6 +17,8 @@ import com.zx.sms.codec.sgip12.codec.SgipTraceRequestMessageCodec;
 import com.zx.sms.codec.sgip12.codec.SgipTraceResponseMessageCodec;
 import com.zx.sms.codec.sgip12.codec.SgipUnbindRequestMessageCodec;
 import com.zx.sms.codec.sgip12.codec.SgipUnbindResponseMessageCodec;
+import com.zx.sms.codec.sgip12.codec.SgipActiveTestRequestMessageCodec;
+import com.zx.sms.codec.sgip12.codec.SgipActiveTestResponseMessageCodec;
 
 import io.netty.handler.codec.MessageToMessageCodec;
 
@@ -29,6 +31,8 @@ public enum SgipPacketType implements PacketType {
 	BINDRESPONSE(0x80000001, SgipBindResponse.class,SgipBindResponseMessageCodec.class),
 	UNBINDREQUEST(0x00000002, SgipUnbindRequest.class,SgipUnbindRequestMessageCodec.class),
 	UNBINDRESPONSE(0x80000002, SgipUnbindResponse.class,SgipUnbindResponseMessageCodec.class),
+	ACTIVETESTREQUEST(0x01000001, SgipActiveTestRequest.class,SgipActiveTestRequestMessageCodec.class),
+	ACTIVETESTRESPONSE(0x81000001, SgipActiveTestResponse.class,SgipActiveTestResponseMessageCodec.class),
 	SUBMITREQUEST(0x00000003, SgipSubmitRequest.class,SgipSubmitRequestMessageCodec.class),
 	SUBMITRESPONSE(0x80000003, SgipSubmitResponse.class,SgipSubmitResponseMessageCodec.class),
 	DELIVERREQUEST(0x00000004, SgipDeliverRequest.class,SgipDeliverRequestMessageCodec.class),

@@ -14,6 +14,8 @@ import com.zx.sms.handler.sgip.SgipUnbindRequestMessageHandler;
 import com.zx.sms.handler.sgip.SgipUnbindResponseMessageHandler;
 import com.zx.sms.session.AbstractSessionStateManager;
 import com.zx.sms.session.sgip.SgipSessionStateManager;
+import com.zx.sms.handler.sgip.SgipActiveTestRequestMessageHandler;
+import com.zx.sms.handler.sgip.SgipActiveTestResponseMessageHandler;
 
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelPipeline;
@@ -36,6 +38,8 @@ public class SgipServerChildEndpointConnector extends AbstractEndpointConnector{
 		//处理长短信
 		pipe.addLast("SgipDeliverLongMessageHandler", new SgipDeliverLongMessageHandler(entity));
 		pipe.addLast("SgipSubmitLongMessageHandler",  new SgipSubmitLongMessageHandler(entity));
+		pipe.addLast("SgipActiveTestRequestMessageHandler",new SgipActiveTestRequestMessageHandler());
+		pipe.addLast("SgipActiveTestResponseMessageHandler",new SgipActiveTestResponseMessageHandler());
 		pipe.addLast("SgipUnbindResponseMessageHandler", new SgipUnbindResponseMessageHandler());
 		pipe.addLast("SgipUnbindRequestMessageHandler", new SgipUnbindRequestMessageHandler());
 	}

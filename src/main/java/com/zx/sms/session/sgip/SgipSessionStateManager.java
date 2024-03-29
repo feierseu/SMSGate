@@ -9,6 +9,7 @@ import com.zx.sms.codec.cmpp.msg.DefaultMessage;
 import com.zx.sms.codec.cmpp.msg.Message;
 import com.zx.sms.codec.sgip12.msg.SgipDeliverResponseMessage;
 import com.zx.sms.codec.sgip12.msg.SgipSubmitResponseMessage;
+import com.zx.sms.codec.sgip12.msg.SgipActiveTestRequestMessage;
 import com.zx.sms.codec.smpp.SmppConstants;
 import com.zx.sms.common.storedMap.VersionObject;
 import com.zx.sms.connect.manager.EndpointEntity;
@@ -49,6 +50,9 @@ public class SgipSessionStateManager extends AbstractSessionStateManager<Long, M
 
 	@Override
 	protected boolean closeWhenRetryFailed(Message req) {
+		if(req instanceof SgipActiveTestRequestMessage) {
+			return true;
+		}
 		return getEntity().isCloseWhenRetryFailed();
 	}
 	
