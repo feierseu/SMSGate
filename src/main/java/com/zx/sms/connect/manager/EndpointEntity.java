@@ -92,13 +92,14 @@ public abstract class EndpointEntity implements Serializable {
 	 * 重发request超过maxRetryCnt重试次数后，是否关闭channel
 	 **/
 	boolean closeWhenRetryFailed = true;  //
+
 	/**
-	 *流量整形 ，设置发送消息的速度，单位条
+	 *流量整形 ，设置接收消息的速度，单位条
 	 */
 	private int readLimit = 0;
 	
 	/**
-	 *流量整形 ，设置接收消息的速度，单位条
+	 *流量整形 ，设置发送消息的速度，单位条
 	 */
 	private int writeLimit = 0;
 	
@@ -150,7 +151,18 @@ public abstract class EndpointEntity implements Serializable {
 	 */
 	private SignatureType signatureType;
 	
-    public String getProxy() {
+	/**
+	  * 默认的创建Tcp连接三次握手超时时间,默认3秒
+	 */
+	private int connectionTimeOut = 3000;
+	
+    public int getConnectionTimeOut() {
+		return connectionTimeOut;
+	}
+	public void setConnectionTimeOut(int connectionTimeOut) {
+		this.connectionTimeOut = connectionTimeOut;
+	}
+	public String getProxy() {
 		return proxy;
 	}
 	public void setProxy(String proxy) {
